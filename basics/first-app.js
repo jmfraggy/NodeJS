@@ -50,3 +50,15 @@ fs.writeFileSync('hello.txt', 'Hello from Node.js');
 // GraphQL API - Modern way of API with advantages over REST
 // Deployment - Real server, setting up SSL encryption
 // Web Servers
+
+// Use the REPL
+// Great Playground and execute live.
+
+// JavaScript Summary
+// Weakly Typed Language - No explicit type assignment, data types can be switched dynamically.
+// Object-Oriented - Data can be organized in logical objects, primitive and reference types.
+// Versatile Language - Runs in browser & directly on a PC/server, can perform a broad variety of tasks
+
+
+
+
