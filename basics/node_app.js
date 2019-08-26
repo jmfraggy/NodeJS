@@ -1,4 +1,7 @@
 // Server Through Node.js
+// Use npm start
+// In scripts, add start with the file
+// Use npm run for other scripts 
 
 const http = require('http');
 
