@@ -18,7 +18,10 @@ Install [Node](https://nodejs.org/en/):
 brew install node
 node -v
 ```
-
+Install nodemon
+```bash
+npm install nodemon --save-dev
+```
 ## Usage
 ```bash
 node file_name.js

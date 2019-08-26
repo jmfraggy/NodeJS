@@ -6,8 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node node_app.js",
-    "start-server": "node node_app.js" 
+    "start-server": "node node_app.js"
   },
   "author": "Fraggy",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
 }
