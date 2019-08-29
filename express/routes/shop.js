@@ -2,12 +2,10 @@ const path = require('path');
 
 const express = require('express');
 
-const rootDir = require('../util/path');
+const productsController = require('../controllers/products');
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-    res.sendFile(path.join(rootDir, 'views', 'shop.html')); // Better for win mac & lin path
-}); // USE use all the http methods
+router.get('/', productsController.getProducts);
 
- module.exports = router;
+module.exports = router;
