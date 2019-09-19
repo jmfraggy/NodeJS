@@ -4,13 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const errorController = require('./controllers/error');
-const sequelize = require('./util/database');
-const Product = require('./models/product');
-const User = require('./models/user');
-const Cart = require('./models/cart');
-const CartItem = require('./models/cart-item');
-const Order = require('./models/order');
-const OrderItem = require('./models/order-item');
+const mongoConnect = require('./util/database').mongoConnect;
+const User = require( './models/user');
 
 const app = express();
 
@@ -25,9 +20,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Register as middleware - save user of the db
 app.use((req, res, next) => {
-  User.findByPk(1)
+  User.findById('5d83d3e4c5a264021890d4be')
     .then(user => {
-      req.user = user;
+      req.user = new User(user.name, user.email, user.cart, user._id);
       next();
     })
     .catch(err => console.log(err));
@@ -38,38 +33,7 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-// Relations
-Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' }); 
-User.hasMany(Product); // User hasMany Products
-User.hasOne(Cart);
-Cart.belongsTo(User);
-// through: Where these connection should be stored 
-Cart.belongsToMany(Product, { through: CartItem}); 
-Product.belongsToMany(Cart, { through: CartItem});
-Order.belongsTo(User);
-User.hasMany(Order);
-Order.belongsToMany(Product, { through: OrderItem });
-
-// .sync() - Sync Models to the database by creating the appropiate tables
-sequelize
-  // .sync({force: true})  
-  .sync()
-  .then(result => {
-    return User.findByPk(1);
-    // console.log(result);
-  })
-  .then(user => {
-    if (!user) {
-      return User.create( {name: 'Fraggy', email: 'test@gmail.com'});
-    }
-    return user;
-  })
-  .then(user => {
-    return user.createCart();
-  })
-  .then(cart => {
-    app.listen(3000);
-  })
-  .catch(err => {
-    console.log(err);
-  });
+// Pass Callback so a function that will gete executed once we connect it 
+mongoConnect(() => {
+  app.listen(3000);
+});
