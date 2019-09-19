@@ -24,7 +24,7 @@ npm install nodemon --save-dev
 ```
 ## Usage
 ```bash
-node file_name.js
+nodemon app.js
 ```
 
 ## Contributing
